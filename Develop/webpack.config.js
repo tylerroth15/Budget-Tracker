@@ -3,28 +3,44 @@ const path = require("path");
 
 const config = {
   // Update the entry point
-  entry: "./public/assets/js/app.js",
+  entry: "./public/index.js",
   output: {
     // Set the path and filename for the output bundle (hint: You will need to use "__dirname")
-    path: path.join(_dirname + "./public/dist/"),
+    path: path.join(__dirname, "./public/dist/"),
     filename: "bundle.js"
   },
   mode: "development",
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.js$/,
+  //       exclude: /node_modules/,
+  //       use: {
+  //         loader: "babel-loader",
+  //         options: {
+  //           presets: ["@babel/preset-env"]
+  //         }
+  //       }
+  //     }
+  //   ]
+  // },
+
   plugins: [new WebpackPwaManifest({
-    name: 'Images App',
-    short_name: 'Images App',
-    description: 'This is my super awesome Images App Description!',
+    name: 'Progressive Budget',
+    short_name: 'Budget App',
+    description: 'Homework for week 18: Progressive Budget App',
     theme_color: "#ffffff",
     background_color: '#ffffff',
     display: "standalone",
-    // crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+    start_url: "/",
+    crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
     icons: [
       {
-        src: path.resolve('./public/assets/images/icons/icon-512x512.png'),
-        sizes: [72 ,96, 128, 144, 152, 192, 256, 384, 512] // multiple sizes
+        src: path.resolve('./public/icons/icon-512x512.png'),
+        sizes: [72, 96, 128, 144, 152, 192, 256, 384, 512] // multiple sizes
       }
     ],
-    inject: false, 
+    inject: false,
     fingerprints: false
   })]
 };
